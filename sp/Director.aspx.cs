@@ -18,7 +18,7 @@ public partial class _Default : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["test1"].ConnectionString;
         string queryTab1 = "SELECT msgid, category, sug, subd, username, userid, userdept, userdesig, status FROM sp WHERE status = 'In Progress'";
-        string queryTab2 = "SELECT msgid, category, sug, subd, username, userid, userdept, userdesig, status FROM sp WHERE status IN ('Withheld by Committee', 'Replied', 'Rejected', 'Rejected by committee')";
+        string queryTab2 = "SELECT msgid, category, sug, subd, username, userid, userdept, userdesig, status FROM sp WHERE status IN ('Withheld by Committee', 'Replied', 'Rejected', 'Rejected by committee', 'Mail Forwarded')";
         string queryTab3 = "SELECT msgid, category, sug, subd, username, userid, userdept, userdesig, status FROM sp WHERE status IN ('Withheld by Committee', 'Replied', 'Rejected by committee')";
 
         if (!string.IsNullOrEmpty(searchKeyword))
@@ -135,6 +135,47 @@ public partial class _Default : System.Web.UI.Page
 
 
     protected void Button2_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        string[] args = btn.CommandArgument.Split('|');
+
+        if (args.Length < 2)
+        {
+            Response.Write("<script>alert('User ID or Message ID is missing.');</script>");
+            return;
+        }
+
+        string userId = args[0];
+        string msgid = args[1];
+        string connectionString = ConfigurationManager.ConnectionStrings["test1"].ConnectionString;
+        string query = "SELECT status FROM sp WHERE msgid = @MsgID";
+        string status = string.Empty;
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@MsgID", msgid);
+                var result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    status = result.ToString();
+                }
+            }
+        }
+
+        if (status == "Replied")
+        {
+            Response.Redirect("DirectorspageReport1.aspx?userid=" + userId + "&msgid=" + msgid);
+        }
+        else
+        {
+            Response.Redirect("DirectorspageReport.aspx?userid=" + userId + "&msgid=" + msgid);
+        }
+    }
+
+
+    protected void Button3_Click(object sender, EventArgs e)
     {
         Button btn = (Button)sender;
         string[] args = btn.CommandArgument.Split('|');
