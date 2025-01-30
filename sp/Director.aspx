@@ -177,7 +177,7 @@
                                     <td><%# Eval("category") %></td>
                                     <td><%# Eval("subd") %></td>
                                     <td><%# Eval("status") %></td>
-                                    <td><asp:Button ID="Button1" OnClick="Button2_Click" CssClass="open-btn" runat="server" Text="Open" CommandArgument='<%# Eval("userid") + "|" + Eval("msgid") %>' /></td>
+                                    <td><asp:Button ID="Button2" OnClick="Button2_Click" CssClass="open-btn" runat="server" Text="Open" CommandArgument='<%# Eval("userid") + "|" + Eval("msgid") %>' /></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -210,7 +210,7 @@
                                     <td><%# Eval("category") %></td>
                                     <td><%# Eval("subd") %></td>
                                     <td><%# Eval("status") %></td>
-                                    <td><asp:Button ID="Button1" OnClick="Button2_Click" CssClass="open-btn" runat="server" Text="Open" CommandArgument='<%# Eval("userid") + "|" + Eval("msgid") %>' /></td>
+                                    <td><asp:Button ID="Button3" OnClick="Button3_Click" CssClass="open-btn" runat="server" Text="Open" CommandArgument='<%# Eval("userid") + "|" + Eval("msgid") %>' /></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
