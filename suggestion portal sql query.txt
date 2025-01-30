@@ -1,0 +1,28 @@
+//To create sql table for login page
+
+CREATE TABLE [dbo].[edatad](
+	[eid] [int] NULL,
+	[ename] [nchar](100) NULL,
+	[epass] [nvarchar](50) NULL,
+	[department] [nchar](100) NULL,
+	[designation] [nchar](100) NULL,
+	[role] [nchar](100) NULL,
+	[committee] [nvarchar](255) NULL
+) ON [PRIMARY]
+
+//To create sql table for suggestion message portal 
+
+CREATE TABLE [dbo].[sp](
+	[username] [nvarchar](max) NULL,
+	[userid] [nchar](10) NULL,
+	[userdept] [nchar](400) NULL,
+	[userdesig] [nchar](400) NULL,
+	[category] [nchar](10) NULL,
+	[sug] [nvarchar](max) NULL,
+	[subd] [datetime] NULL,
+	[srep] [nvarchar](max) NULL,
+	[srepd] [datetime] NULL,
+	[msgid] [int] IDENTITY(1,1) NOT NULL,
+	[status] [varchar](50) NULL,
+	[committee] [varchar](255) NULL,
+	[replied_by] [nvarchar](255) NULL,
